@@ -740,26 +740,54 @@
                     formData.othersSpecify = 'N/A';
                 }
 
-                // Google Sheets Web App URL
-                // ✅ CONFIGURED: Your Google Apps Script Web App URL
-                const GOOGLE_SCRIPT_URL = 'https://script.google.com/a/macros/digicides.com/s/AKfycbw3MCeiKMcj_ooZ3CdTSdHVDDJq09F1freK3e8BcGUyU0Bo-Lfq-Gl1J2V3LnaIM2QJ/exec';
+                // Webhook URL
+                // ⚠️ IMPORTANT: Replace this with your actual webhook URL
+                // Example: https://hooks.zapier.com/hooks/catch/...
+                // Or: https://your-api.com/webhook
+                const WEBHOOK_URL = 'YOUR_WEBHOOK_URL_HERE';
 
-                console.log('📤 Sending data to Google Sheets...');
+                // Check if webhook URL has been configured
+                if (WEBHOOK_URL === 'https://n8n.srv1152566.hstgr.cloud/webhook-test/3ee5ab7a-da6f-42be-8d22-74c40bf71dba') {
+                    console.error('❌ ERROR: You need to configure your WEBHOOK_URL!');
+                    console.log('📋 Instructions:');
+                    console.log('1. Get your webhook URL from your service (Make.com, Zapier, n8n, etc.)');
+                    console.log('2. Replace WEBHOOK_URL in this file (around line 739)');
+                    console.log('3. Save and reload the page');
+                    alert('⚠️ Configuration Error: Please configure the WEBHOOK_URL in the HTML file. Check the browser console (press F12) for instructions.');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    return;
+                }
+
+                console.log('📤 Sending data to webhook...');
                 console.log('📊 Form Data:', formData);
-                console.log('🌐 Target URL:', GOOGLE_SCRIPT_URL);
+                console.log('🌐 Webhook URL:', WEBHOOK_URL);
 
-                // Send data to Google Sheets
-                fetch(GOOGLE_SCRIPT_URL, {
+                // Send data to webhook
+                fetch(WEBHOOK_URL, {
                     method: 'POST',
-                    mode: 'no-cors', // Required for Google Apps Script
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(formData)
                 })
-                .then(() => {
+                .then(response => {
+                    console.log('✅ Response received from webhook');
+                    console.log('📝 Status:', response.status);
+                    
+                    if (response.ok) {
+                        return response.json().catch(() => {
+                            // If response is not JSON, that's okay
+                            return { status: 'success' };
+                        });
+                    } else {
+                        throw new Error(`Webhook returned status ${response.status}`);
+                    }
+                })
+                .then(data => {
                     console.log('✅ Data sent successfully!');
-                    console.log('📝 Check your Google Sheet for the new entry');
+                    console.log('📝 Webhook response:', data);
+                    
                     // Hide form
                     document.getElementById('hithaForm').style.display = 'none';
                     // Show success message
@@ -767,12 +795,14 @@
                 })
                 .catch(error => {
                     console.error('❌ Error during submission:', error);
-                    console.log('⚠️ Note: With no-cors mode, this error might appear even if data was sent successfully');
-                    console.log('📝 Check your Google Sheet to verify if data was received');
+                    console.log('⚠️ Please check:');
+                    console.log('1. Webhook URL is correct');
+                    console.log('2. Webhook service is active');
+                    console.log('3. No CORS restrictions');
                     
-                    // Show success message anyway (no-cors doesn't give us real feedback)
-                    document.getElementById('hithaForm').style.display = 'none';
-                    document.getElementById('successMessage').classList.add('show');
+                    alert('⚠️ Error submitting form: ' + error.message + '\n\nPlease check the console (F12) for details and try again.');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
                 });
             } else {
                 // Scroll to first error
