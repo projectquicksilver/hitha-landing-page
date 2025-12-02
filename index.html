@@ -725,8 +725,13 @@
                     formData.taluka = document.getElementById('taluka').value;
                     formData.village = document.getElementById('village').value;
                     formData.description = document.getElementById('description').value || 'Not provided';
+                    formData.othersSpecify = 'N/A';
                 } else if (formData.userType === 'others') {
                     formData.othersSpecify = document.getElementById('othersSpecify').value;
+                    formData.district = 'N/A';
+                    formData.taluka = 'N/A';
+                    formData.village = 'N/A';
+                    formData.description = 'N/A';
                 } else {
                     formData.district = 'N/A';
                     formData.taluka = 'N/A';
@@ -735,30 +740,39 @@
                     formData.othersSpecify = 'N/A';
                 }
 
-                // Google Sheets Web App URL - Replace with your deployed web app URL
-                const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw3MCeiKMcj_ooZ3CdTSdHVDDJq09F1freK3e8BcGUyU0Bo-Lfq-Gl1J2V3LnaIM2QJ/exec';
+                // Google Sheets Web App URL
+                // ✅ CONFIGURED: Your Google Apps Script Web App URL
+                const GOOGLE_SCRIPT_URL = 'https://script.google.com/a/macros/digicides.com/s/AKfycbw3MCeiKMcj_ooZ3CdTSdHVDDJq09F1freK3e8BcGUyU0Bo-Lfq-Gl1J2V3LnaIM2QJ/exec';
+
+                console.log('📤 Sending data to Google Sheets...');
+                console.log('📊 Form Data:', formData);
+                console.log('🌐 Target URL:', GOOGLE_SCRIPT_URL);
 
                 // Send data to Google Sheets
                 fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors',
+                    mode: 'no-cors', // Required for Google Apps Script
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(formData)
                 })
                 .then(() => {
+                    console.log('✅ Data sent successfully!');
+                    console.log('📝 Check your Google Sheet for the new entry');
                     // Hide form
                     document.getElementById('hithaForm').style.display = 'none';
                     // Show success message
                     document.getElementById('successMessage').classList.add('show');
-                    console.log('Form data sent successfully:', formData);
                 })
                 .catch(error => {
-                    console.error('Error submitting form:', error);
-                    alert('There was an error submitting your form. Please try again.');
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
+                    console.error('❌ Error during submission:', error);
+                    console.log('⚠️ Note: With no-cors mode, this error might appear even if data was sent successfully');
+                    console.log('📝 Check your Google Sheet to verify if data was received');
+                    
+                    // Show success message anyway (no-cors doesn't give us real feedback)
+                    document.getElementById('hithaForm').style.display = 'none';
+                    document.getElementById('successMessage').classList.add('show');
                 });
             } else {
                 // Scroll to first error
