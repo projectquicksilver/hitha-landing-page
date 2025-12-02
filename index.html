@@ -5,16 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hitha Agri Fintech - Empowering Farmers Through Financial Innovation</title>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Manrope:wght@400;500;600&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --primary-green: #2d5016;
-            --secondary-green: #4a7c2c;
-            --accent-gold: #d4a574;
-            --light-cream: #faf8f3;
-            --earth-brown: #8b6f47;
-            --text-dark: #1a1a1a;
-            --success-green: #3d8f3d;
-            --error-red: #c94545;
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --accent-teal: #14b8a6;
+            --light-bg: #f8fafc;
+            --surface-white: #ffffff;
+            --text-dark: #1e293b;
+            --text-medium: #475569;
+            --success-green: #10b981;
+            --error-red: #ef4444;
+            --border-light: #e2e8f0;
+            --shadow-sm: rgba(15, 23, 42, 0.08);
+            --shadow-md: rgba(15, 23, 42, 0.12);
         }
 
         * {
@@ -25,7 +31,7 @@
 
         body {
             font-family: 'Manrope', sans-serif;
-            background: var(--light-cream);
+            background: var(--light-bg);
             color: var(--text-dark);
             overflow-x: hidden;
             line-height: 1.6;
@@ -45,7 +51,7 @@
 
         .particle {
             position: absolute;
-            background: radial-gradient(circle, rgba(77, 124, 44, 0.15), transparent);
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.08), transparent);
             border-radius: 50%;
             animation: float 20s infinite ease-in-out;
         }
@@ -80,7 +86,7 @@
         .logo {
             max-width: 400px;
             height: auto;
-            filter: drop-shadow(0 4px 12px rgba(45, 80, 22, 0.15));
+            filter: drop-shadow(0 4px 12px var(--shadow-sm));
             transition: transform 0.3s ease;
         }
 
@@ -104,7 +110,7 @@
             font-family: 'Playfair Display', serif;
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
-            color: var(--primary-green);
+            color: var(--primary-blue);
             margin-bottom: 1.5rem;
             line-height: 1.2;
             letter-spacing: -0.01em;
@@ -112,7 +118,7 @@
 
         .hero-subtitle {
             font-size: clamp(1.1rem, 2vw, 1.4rem);
-            color: var(--earth-brown);
+            color: var(--text-medium);
             max-width: 700px;
             margin: 0 auto 2.5rem;
             font-weight: 500;
@@ -129,16 +135,24 @@
         }
 
         .pill {
-            background: linear-gradient(135deg, var(--secondary-green), var(--primary-green));
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
             color: white;
             padding: 0.8rem 1.8rem;
             border-radius: 50px;
             font-weight: 600;
             font-size: 0.95rem;
-            box-shadow: 0 4px 15px rgba(45, 80, 22, 0.2);
+            box-shadow: 0 4px 15px var(--shadow-sm);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pill svg {
+            width: 18px;
+            height: 18px;
         }
 
         .pill::before {
@@ -154,7 +168,7 @@
 
         .pill:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(45, 80, 22, 0.35);
+            box-shadow: 0 6px 25px var(--shadow-md);
         }
 
         .pill:hover::before {
@@ -165,10 +179,10 @@
         .form-container {
             max-width: 650px;
             margin: 0 auto;
-            background: white;
+            background: var(--surface-white);
             padding: 3rem;
             border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 60px var(--shadow-md);
             position: relative;
             animation: fadeInUp 1s ease-out 0.6s both;
         }
@@ -180,7 +194,7 @@
             left: 0;
             right: 0;
             height: 6px;
-            background: linear-gradient(90deg, var(--primary-green), var(--accent-gold), var(--secondary-green));
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-teal), var(--secondary-blue));
             border-radius: 24px 24px 0 0;
         }
 
@@ -188,7 +202,7 @@
             font-family: 'Syne', sans-serif;
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--primary-green);
+            color: var(--primary-blue);
             margin-bottom: 2rem;
             text-align: center;
         }
@@ -223,7 +237,7 @@
         textarea {
             width: 100%;
             padding: 0.9rem 1.2rem;
-            border: 2px solid #e0e0e0;
+            border: 2px solid var(--border-light);
             border-radius: 12px;
             font-size: 1rem;
             font-family: 'Manrope', sans-serif;
@@ -235,8 +249,8 @@
         select:focus,
         textarea:focus {
             outline: none;
-            border-color: var(--secondary-green);
-            box-shadow: 0 0 0 4px rgba(74, 124, 44, 0.1);
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
         }
 
         input.error,
@@ -273,7 +287,7 @@
             display: flex;
             align-items: center;
             padding: 1rem;
-            border: 2px solid #e0e0e0;
+            border: 2px solid var(--border-light);
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -281,8 +295,8 @@
         }
 
         .radio-option:hover {
-            border-color: var(--secondary-green);
-            background: rgba(74, 124, 44, 0.03);
+            border-color: var(--secondary-blue);
+            background: rgba(59, 130, 246, 0.03);
         }
 
         .radio-option input[type="radio"] {
@@ -290,19 +304,31 @@
             height: 20px;
             margin-right: 12px;
             cursor: pointer;
-            accent-color: var(--secondary-green);
+            accent-color: var(--secondary-blue);
         }
 
         .radio-option.selected {
-            border-color: var(--secondary-green);
-            background: rgba(74, 124, 44, 0.08);
+            border-color: var(--secondary-blue);
+            background: rgba(59, 130, 246, 0.08);
+        }
+
+        .radio-option span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .radio-option svg {
+            width: 20px;
+            height: 20px;
+            color: var(--secondary-blue);
         }
 
         /* Submit Button */
         .submit-btn {
             width: 100%;
             padding: 1.1rem;
-            background: linear-gradient(135deg, var(--secondary-green), var(--primary-green));
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
             color: white;
             border: none;
             border-radius: 12px;
@@ -311,7 +337,7 @@
             font-family: 'Syne', sans-serif;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(45, 80, 22, 0.3);
+            box-shadow: 0 4px 15px var(--shadow-sm);
             position: relative;
             overflow: hidden;
         }
@@ -331,7 +357,7 @@
 
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(45, 80, 22, 0.4);
+            box-shadow: 0 8px 25px var(--shadow-md);
         }
 
         .submit-btn:hover::before {
@@ -354,7 +380,7 @@
             display: none;
             text-align: center;
             padding: 2rem;
-            background: linear-gradient(135deg, rgba(61, 143, 61, 0.1), rgba(74, 124, 44, 0.1));
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(20, 184, 166, 0.1));
             border-radius: 16px;
             border: 2px solid var(--success-green);
             margin-top: 2rem;
@@ -387,7 +413,7 @@
         footer {
             text-align: center;
             padding: 3rem 5%;
-            color: var(--earth-brown);
+            color: var(--text-medium);
             font-size: 0.9rem;
             margin-top: 4rem;
         }
@@ -473,7 +499,7 @@
 
                 <div class="form-group">
                     <label for="mobile">Mobile Number <span class="required">*</span></label>
-                    <input type="tel" id="mobile" name="mobile" placeholder="Enter 10-digit mobile number" required pattern="[0-9]{10}">
+                    <input type="tel" id="mobile" name="mobile" placeholder="Enter 10-digit mobile number" required pattern="[0-9]{10}" maxlength="10">
                     <div class="error-message" id="mobileError">Please enter a valid 10-digit mobile number</div>
                 </div>
 
@@ -678,7 +704,9 @@
             // Validate mobile
             const mobile = document.getElementById('mobile');
             const mobilePattern = /^[0-9]{10}$/;
-            if (!mobilePattern.test(mobile.value)) {
+            const mobileValue = mobile.value.trim();
+            
+            if (!mobilePattern.test(mobileValue)) {
                 mobile.classList.add('error');
                 document.getElementById('mobileError').classList.add('show');
                 isValid = false;
@@ -686,10 +714,17 @@
 
             // Validate email if provided
             const email = document.getElementById('email');
-            if (email.value && !email.validity.valid) {
-                email.classList.add('error');
-                document.getElementById('emailError').classList.add('show');
-                isValid = false;
+            const emailValue = email.value.trim();
+            
+            if (emailValue) {
+                // Check for valid email format
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(emailValue)) {
+                    email.classList.add('error');
+                    document.getElementById('emailError').textContent = 'Please enter a valid email address';
+                    document.getElementById('emailError').classList.add('show');
+                    isValid = false;
+                }
             }
 
             // Validate user type
@@ -778,7 +813,7 @@
 
                 // Webhook URL
                 // ✅ CONFIGURED: Your n8n webhook URL
-                const WEBHOOK_URL = 'https://n8n.srv1152566.hstgr.cloud/webhook-test/3ee5ab7a-da6f-42be-8d22-74c40bf71dba';
+                const WEBHOOK_URL = 'https://n8n.srv1152566.hstgr.cloud/webhook/3ee5ab7a-da6f-42be-8d22-74c40bf71dba';
 
                 console.log('📤 Sending data to webhook...');
                 console.log('📊 Form Data:', formData);
@@ -852,6 +887,17 @@
                     if (errorEl) errorEl.classList.remove('show');
                 }
             });
+        });
+
+        // Mobile number: Only allow digits and limit to 10
+        document.getElementById('mobile').addEventListener('input', function(e) {
+            // Remove any non-digit characters
+            this.value = this.value.replace(/[^0-9]/g, '');
+            
+            // Limit to 10 digits
+            if (this.value.length > 10) {
+                this.value = this.value.slice(0, 10);
+            }
         });
     </script>
 </body>
