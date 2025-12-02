@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hitha Agri Fintech - Empowering Farmers Through Financial Innovation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #2d5016;
+            --secondary-green: #4a7c2c;
+            --accent-gold: #d4a574;
+            --light-cream: #faf8f3;
+            --earth-brown: #8b6f47;
+            --text-dark: #1a1a1a;
+            --success-green: #3d8f3d;
+            --error-red: #c94545;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: var(--light-cream);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated background particles */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(77, 124, 44, 0.15), transparent);
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) { width: 300px; height: 300px; top: -150px; left: -150px; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 400px; height: 400px; top: 50%; right: -200px; animation-delay: 3s; }
+        .particle:nth-child(3) { width: 250px; height: 250px; bottom: -125px; left: 30%; animation-delay: 6s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+            33% { transform: translate(50px, -50px) scale(1.1); opacity: 0.5; }
+            66% { transform: translate(-30px, 30px) scale(0.9); opacity: 0.4; }
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 5%;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo {
+            max-width: 280px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(45, 80, 22, 0.15));
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 3rem 5% 5rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--earth-brown);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            font-weight: 500;
+        }
+
+        /* Feature Pills */
+        .feature-pills {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .pill {
+            background: linear-gradient(135deg, var(--secondary-green), var(--primary-green));
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 15px rgba(45, 80, 22, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .pill:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(45, 80, 22, 0.35);
+        }
+
+        .pill:hover::before {
+            left: 100%;
+        }
+
+        /* Form Container */
+        .form-container {
+            max-width: 650px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            position: relative;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary-green), var(--accent-gold), var(--secondary-green));
+            border-radius: 24px 24px 0 0;
+        }
+
+        .form-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 1.8rem;
+            animation: fadeIn 0.5s ease-out both;
+        }
+
+        .form-group.hidden {
+            display: none;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .required {
+            color: var(--error-red);
+            margin-left: 3px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Manrope', sans-serif;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--secondary-green);
+            box-shadow: 0 0 0 4px rgba(74, 124, 44, 0.1);
+        }
+
+        input.error,
+        select.error {
+            border-color: var(--error-red);
+        }
+
+        .error-message {
+            color: var(--error-red);
+            font-size: 0.85rem;
+            margin-top: 0.4rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: shake 0.3s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Radio Buttons */
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .radio-option:hover {
+            border-color: var(--secondary-green);
+            background: rgba(74, 124, 44, 0.03);
+        }
+
+        .radio-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: var(--secondary-green);
+        }
+
+        .radio-option.selected {
+            border-color: var(--secondary-green);
+            background: rgba(74, 124, 44, 0.08);
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 1.1rem;
+            background: linear-gradient(135deg, var(--secondary-green), var(--primary-green));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Syne', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(45, 80, 22, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(45, 80, 22, 0.4);
+        }
+
+        .submit-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(61, 143, 61, 0.1), rgba(74, 124, 44, 0.1));
+            border-radius: 16px;
+            border: 2px solid var(--success-green);
+            margin-top: 2rem;
+            animation: successPop 0.5s ease-out;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @keyframes successPop {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .success-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-message h3 {
+            font-family: 'Syne', sans-serif;
+            color: var(--success-green);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 5%;
+            color: var(--earth-brown);
+            font-size: 0.9rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .form-container {
+                padding: 2rem 1.5rem;
+                margin: 0 1rem;
+            }
+
+            .feature-pills {
+                gap: 0.7rem;
+            }
+
+            .pill {
+                padding: 0.7rem 1.4rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <header>
+        <div class="logo-container">
+            <img src="https://www.hitha.farm/assets/hithaLogo-DEs6bVVr.png" alt="Hitha Agri Fintech Logo" class="logo">
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Empowering Farmers Through Financial Innovation</h1>
+            <p class="hero-subtitle">Building financial literacy and discipline through integrated technical, financial, and marketing support for the farming community</p>
+            
+            <div class="feature-pills">
+                <div class="pill">💰 Financial Support</div>
+                <div class="pill">🛠️ Technical Expertise</div>
+                <div class="pill">📈 Marketing Solutions</div>
+            </div>
+        </section>
+
+        <section class="form-container">
+            <h2 class="form-title">Join the Hitha Community</h2>
+            
+            <form id="hithaForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name <span class="required">*</span></label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                    <div class="error-message" id="nameError">Please enter your full name</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mobile">Mobile Number <span class="required">*</span></label>
+                    <input type="tel" id="mobile" name="mobile" placeholder="Enter 10-digit mobile number" required pattern="[0-9]{10}">
+                    <div class="error-message" id="mobileError">Please enter a valid 10-digit mobile number</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address <span style="color: #888;">(Optional)</span></label>
+                    <input type="email" id="email" name="email" placeholder="your.email@example.com">
+                    <div class="error-message" id="emailError">Please enter a valid email address</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Which describes you best? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="userType" value="farmer" required>
+                            <span>👨‍🌾 Farmer</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="userType" value="student" required>
+                            <span>🎓 Student</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="userType" value="university_staff" required>
+                            <span>👔 University Staff</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="userType" value="others" required>
+                            <span>👤 Others</span>
+                        </label>
+                    </div>
+                    <div class="error-message" id="userTypeError">Please select an option</div>
+                </div>
+
+                <!-- Conditional Fields for Farmer -->
+                <div id="farmerFields" class="form-group hidden">
+                    <label for="district">District <span class="required">*</span></label>
+                    <input type="text" id="district" name="district" placeholder="Enter your district">
+                    <div class="error-message" id="districtError">Please enter your district</div>
+                </div>
+
+                <div id="talukaField" class="form-group hidden">
+                    <label for="taluka">Taluka <span class="required">*</span></label>
+                    <input type="text" id="taluka" name="taluka" placeholder="Enter your taluka">
+                    <div class="error-message" id="talukaError">Please enter your taluka</div>
+                </div>
+
+                <div id="villageField" class="form-group hidden">
+                    <label for="village">Village <span class="required">*</span></label>
+                    <input type="text" id="village" name="village" placeholder="Enter your village name">
+                    <div class="error-message" id="villageError">Please enter your village name</div>
+                </div>
+
+                <div id="descriptionField" class="form-group hidden">
+                    <label for="description">Description <span style="color: #888;">(Optional)</span></label>
+                    <textarea id="description" name="description" rows="3" placeholder="Tell us more about yourself (optional)"></textarea>
+                </div>
+
+                <!-- Conditional Field for Others -->
+                <div id="othersField" class="form-group hidden">
+                    <label for="othersSpecify">Please Specify <span class="required">*</span></label>
+                    <input type="text" id="othersSpecify" name="othersSpecify" placeholder="Please specify your role/profession">
+                    <div class="error-message" id="othersError">Please specify your role</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Are you willing to receive communications from Hitha on WhatsApp? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="whatsapp" value="yes" required>
+                            <span>✅ Yes, keep me updated</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="whatsapp" value="no" required>
+                            <span>❌ No, thanks</span>
+                        </label>
+                    </div>
+                    <div class="error-message" id="whatsappError">Please select an option</div>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Application</button>
+            </form>
+
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">🎉</div>
+                <h3>Thank You!</h3>
+                <p>Your information has been successfully submitted. We'll be in touch soon!</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Hitha Agri Fintech Pvt Ltd. All rights reserved.</p>
+        <p>Empowering farmers with financial literacy and discipline</p>
+    </footer>
+
+    <script>
+        // Radio button visual feedback
+        document.querySelectorAll('.radio-option input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                // Remove selected class from all options in the same group
+                const group = this.name;
+                document.querySelectorAll(`input[name="${group}"]`).forEach(r => {
+                    r.closest('.radio-option').classList.remove('selected');
+                });
+                // Add selected class to chosen option
+                this.closest('.radio-option').classList.add('selected');
+            });
+        });
+
+        // Conditional field display based on user type
+        document.querySelectorAll('input[name="userType"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const farmerFields = document.getElementById('farmerFields');
+                const talukaField = document.getElementById('talukaField');
+                const villageField = document.getElementById('villageField');
+                const descriptionField = document.getElementById('descriptionField');
+                const othersField = document.getElementById('othersField');
+
+                // Hide all conditional fields first
+                farmerFields.classList.add('hidden');
+                talukaField.classList.add('hidden');
+                villageField.classList.add('hidden');
+                descriptionField.classList.add('hidden');
+                othersField.classList.add('hidden');
+
+                // Clear validation for hidden fields
+                document.getElementById('district').removeAttribute('required');
+                document.getElementById('taluka').removeAttribute('required');
+                document.getElementById('village').removeAttribute('required');
+                document.getElementById('othersSpecify').removeAttribute('required');
+
+                // Show relevant fields based on selection
+                if (this.value === 'farmer') {
+                    farmerFields.classList.remove('hidden');
+                    talukaField.classList.remove('hidden');
+                    villageField.classList.remove('hidden');
+                    descriptionField.classList.remove('hidden');
+                    
+                    document.getElementById('district').setAttribute('required', 'required');
+                    document.getElementById('taluka').setAttribute('required', 'required');
+                    document.getElementById('village').setAttribute('required', 'required');
+                } else if (this.value === 'others') {
+                    othersField.classList.remove('hidden');
+                    document.getElementById('othersSpecify').setAttribute('required', 'required');
+                }
+            });
+        });
+
+        // Form validation and submission
+        document.getElementById('hithaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let isValid = true;
+
+            // Clear all error states
+            document.querySelectorAll('.error-message').forEach(el => el.classList.remove('show'));
+            document.querySelectorAll('input, select').forEach(el => el.classList.remove('error'));
+
+            // Validate name
+            const fullName = document.getElementById('fullName');
+            if (!fullName.value.trim()) {
+                fullName.classList.add('error');
+                document.getElementById('nameError').classList.add('show');
+                isValid = false;
+            }
+
+            // Validate mobile
+            const mobile = document.getElementById('mobile');
+            const mobilePattern = /^[0-9]{10}$/;
+            if (!mobilePattern.test(mobile.value)) {
+                mobile.classList.add('error');
+                document.getElementById('mobileError').classList.add('show');
+                isValid = false;
+            }
+
+            // Validate email if provided
+            const email = document.getElementById('email');
+            if (email.value && !email.validity.valid) {
+                email.classList.add('error');
+                document.getElementById('emailError').classList.add('show');
+                isValid = false;
+            }
+
+            // Validate user type
+            const userType = document.querySelector('input[name="userType"]:checked');
+            if (!userType) {
+                document.getElementById('userTypeError').classList.add('show');
+                isValid = false;
+            }
+
+            // Validate conditional fields
+            if (userType && userType.value === 'farmer') {
+                const district = document.getElementById('district');
+                const taluka = document.getElementById('taluka');
+                const village = document.getElementById('village');
+
+                if (!district.value.trim()) {
+                    district.classList.add('error');
+                    document.getElementById('districtError').classList.add('show');
+                    isValid = false;
+                }
+                if (!taluka.value.trim()) {
+                    taluka.classList.add('error');
+                    document.getElementById('talukaError').classList.add('show');
+                    isValid = false;
+                }
+                if (!village.value.trim()) {
+                    village.classList.add('error');
+                    document.getElementById('villageError').classList.add('show');
+                    isValid = false;
+                }
+            }
+
+            if (userType && userType.value === 'others') {
+                const othersSpecify = document.getElementById('othersSpecify');
+                if (!othersSpecify.value.trim()) {
+                    othersSpecify.classList.add('error');
+                    document.getElementById('othersError').classList.add('show');
+                    isValid = false;
+                }
+            }
+
+            // Validate WhatsApp consent
+            const whatsapp = document.querySelector('input[name="whatsapp"]:checked');
+            if (!whatsapp) {
+                document.getElementById('whatsappError').classList.add('show');
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Show loading state
+                const submitBtn = document.querySelector('.submit-btn');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = 'Submitting<span class="loading"></span>';
+                submitBtn.disabled = true;
+
+                // Simulate form submission (replace with actual API call)
+                setTimeout(() => {
+                    // Hide form
+                    document.getElementById('hithaForm').style.display = 'none';
+                    // Show success message
+                    document.getElementById('successMessage').classList.add('show');
+
+                    // Log form data (in production, send to server)
+                    const formData = new FormData(this);
+                    console.log('Form submitted with data:', Object.fromEntries(formData));
+                }, 1500);
+            } else {
+                // Scroll to first error
+                const firstError = document.querySelector('.error');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
+
+        // Real-time validation on blur
+        document.querySelectorAll('input, select').forEach(field => {
+            field.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.classList.add('error');
+                } else {
+                    this.classList.remove('error');
+                }
+            });
+
+            field.addEventListener('input', function() {
+                if (this.classList.contains('error') && this.value.trim()) {
+                    this.classList.remove('error');
+                    const errorId = this.id + 'Error';
+                    const errorEl = document.getElementById(errorId);
+                    if (errorEl) errorEl.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
