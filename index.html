@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hitha Agri Fintech - Empowering Farmers Through Financial Innovation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Manrope:wght@400;500;600&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-green: #2d5016;
@@ -78,7 +78,7 @@
         }
 
         .logo {
-            max-width: 280px;
+            max-width: 400px;
             height: auto;
             filter: drop-shadow(0 4px 12px rgba(45, 80, 22, 0.15));
             transition: transform 0.3s ease;
@@ -101,13 +101,13 @@
         }
 
         .hero h1 {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Playfair Display', serif;
             font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
+            font-weight: 700;
             color: var(--primary-green);
             margin-bottom: 1.5rem;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
         }
 
         .hero-subtitle {
@@ -709,17 +709,57 @@
                 submitBtn.innerHTML = 'Submitting<span class="loading"></span>';
                 submitBtn.disabled = true;
 
-                // Simulate form submission (replace with actual API call)
-                setTimeout(() => {
+                // Prepare form data
+                const formData = {
+                    fullName: document.getElementById('fullName').value,
+                    mobile: document.getElementById('mobile').value,
+                    email: document.getElementById('email').value || 'Not provided',
+                    userType: document.querySelector('input[name="userType"]:checked').value,
+                    whatsappConsent: document.querySelector('input[name="whatsapp"]:checked').value,
+                    timestamp: new Date().toLocaleString()
+                };
+
+                // Add conditional fields based on user type
+                if (formData.userType === 'farmer') {
+                    formData.district = document.getElementById('district').value;
+                    formData.taluka = document.getElementById('taluka').value;
+                    formData.village = document.getElementById('village').value;
+                    formData.description = document.getElementById('description').value || 'Not provided';
+                } else if (formData.userType === 'others') {
+                    formData.othersSpecify = document.getElementById('othersSpecify').value;
+                } else {
+                    formData.district = 'N/A';
+                    formData.taluka = 'N/A';
+                    formData.village = 'N/A';
+                    formData.description = 'N/A';
+                    formData.othersSpecify = 'N/A';
+                }
+
+                // Google Sheets Web App URL - Replace with your deployed web app URL
+                const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+
+                // Send data to Google Sheets
+                fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(() => {
                     // Hide form
                     document.getElementById('hithaForm').style.display = 'none';
                     // Show success message
                     document.getElementById('successMessage').classList.add('show');
-
-                    // Log form data (in production, send to server)
-                    const formData = new FormData(this);
-                    console.log('Form submitted with data:', Object.fromEntries(formData));
-                }, 1500);
+                    console.log('Form data sent successfully:', formData);
+                })
+                .catch(error => {
+                    console.error('Error submitting form:', error);
+                    alert('There was an error submitting your form. Please try again.');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                });
             } else {
                 // Scroll to first error
                 const firstError = document.querySelector('.error');
