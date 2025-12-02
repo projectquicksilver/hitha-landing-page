@@ -569,6 +569,42 @@
     </footer>
 
     <script>
+        // Clear form on page load/refresh to prevent data persistence
+        window.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('hithaForm');
+            
+            // Reset the entire form
+            form.reset();
+            
+            // Clear all text inputs explicitly
+            document.querySelectorAll('input[type="text"], input[type="tel"], input[type="email"], textarea').forEach(input => {
+                input.value = '';
+            });
+            
+            // Uncheck all radio buttons
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.checked = false;
+                radio.closest('.radio-option').classList.remove('selected');
+            });
+            
+            // Hide all conditional fields
+            document.getElementById('farmerFields').classList.add('hidden');
+            document.getElementById('talukaField').classList.add('hidden');
+            document.getElementById('villageField').classList.add('hidden');
+            document.getElementById('descriptionField').classList.add('hidden');
+            document.getElementById('othersField').classList.add('hidden');
+            
+            // Clear all error states
+            document.querySelectorAll('.error-message').forEach(el => el.classList.remove('show'));
+            document.querySelectorAll('input, select, textarea').forEach(el => el.classList.remove('error'));
+            
+            // Make sure form is visible and success message is hidden
+            form.style.display = 'block';
+            document.getElementById('successMessage').classList.remove('show');
+            
+            console.log('✅ Form cleared and ready for new submission');
+        });
+
         // Radio button visual feedback
         document.querySelectorAll('.radio-option input[type="radio"]').forEach(radio => {
             radio.addEventListener('change', function() {
@@ -741,23 +777,8 @@
                 }
 
                 // Webhook URL
-                // ⚠️ IMPORTANT: Replace this with your actual webhook URL
-                // Example: https://hooks.zapier.com/hooks/catch/...
-                // Or: https://your-api.com/webhook
+                // ✅ CONFIGURED: Your n8n webhook URL
                 const WEBHOOK_URL = 'https://n8n.srv1152566.hstgr.cloud/webhook-test/3ee5ab7a-da6f-42be-8d22-74c40bf71dba';
-
-                // Check if webhook URL has been configured
-                if (WEBHOOK_URL === 'https://n8n.srv1152566.hstgr.cloud/webhook-test/3ee5ab7a-da6f-42be-8d22-74c40bf71dba') {
-                    console.error('❌ ERROR: You need to configure your WEBHOOK_URL!');
-                    console.log('📋 Instructions:');
-                    console.log('1. Get your webhook URL from your service (Make.com, Zapier, n8n, etc.)');
-                    console.log('2. Replace WEBHOOK_URL in this file (around line 739)');
-                    console.log('3. Save and reload the page');
-                    alert('⚠️ Configuration Error: Please configure the WEBHOOK_URL in the HTML file. Check the browser console (press F12) for instructions.');
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                    return;
-                }
 
                 console.log('📤 Sending data to webhook...');
                 console.log('📊 Form Data:', formData);
